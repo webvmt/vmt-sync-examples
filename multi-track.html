@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Multiple Track Example</title>
+        <!-- polyfill -->
+        <script type="text/javascript" src="polyfills/texttrackcuepolyfill-texttrack.js"></script>
+
+        <!-- utilities -->
+        <script type="text/javascript" src="utils/vmt-loader.js"></script>
+        <script type="text/javascript" src="utils/vmt-sync-parser.js"></script>
+        
+        <!-- example code -->
+        <script type="text/javascript" src="js/common-example.js"></script>
+        <script type="text/javascript" src="js/count-example.js"></script>
+        <script type="text/javascript" src="js/colour-example.js"></script>
+    </head>
+    <body>
+        <div class="video-wrapper" style="margin:auto; width:672px;">
+            <video id="video-player" controls src="media/big_buck_bunny_720p_1mb.mp4" width="672" height="378">
+                <track src="vmt/count-cues.vmt" kind="metadata" />
+                <track src="vmt/colour-cues.vmt" kind="metadata" />
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+
+        <div style="width:672px; margin:auto;">
+            <div class="content-padding">
+                <span>Count: </span>
+                <div id="count" style="display:inline-block; width:24px;"></div>
+                <span>&nbsp;Colour: </span>
+                <div id="colour" style="display:inline-block; border-radius:6px; width:18px;">&nbsp;&#9679;</div>
+            </div>
+        </div>
+    </body>
+</html>

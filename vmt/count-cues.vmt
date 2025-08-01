@@ -1,0 +1,33 @@
+WEBVMT
+
+MEDIA
+url:big_buck_bunny_720p_1mb.mp4
+mime-type:video/mp4
+
+NOTE Example metadata cues - count only
+
+00:00:00.000 --> 00:00:01.000
+{ "sync": { "type": "org.webvmt.example.count", "data": 5 } }
+
+00:00:01.000 --> 00:00:02.000
+{ "sync": { "type": "org.webvmt.example.count", "data": 4 } }
+
+NOTE Omitted colour cue
+
+00:00:02.000 --> 00:00:03.000
+{ "sync": { "type": "org.webvmt.example.count", "data": 3 } }
+
+NOTE Omitted colour cue
+
+00:00:03.000 --> 00:00:03.500
+{ "sync": { "type": "org.webvmt.example.count", "data": 2 } }
+
+NOTE Omitted colour cue
+
+00:00:04.000 --> 00:00:04.500
+{ "sync": { "type": "org.webvmt.example.count", "data": 1 } }
+
+00:00:05.000 --> 00:00:05.500
+{ "sync": { "type": "org.webvmt.example.count", "data": 0 } }
+
+NOTE Omitted colour cue

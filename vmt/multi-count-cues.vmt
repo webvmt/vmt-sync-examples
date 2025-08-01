@@ -1,0 +1,47 @@
+WEBVMT
+
+MEDIA
+url:big_buck_bunny_720p_1mb.mp4
+mime-type:video/mp4
+
+NOTE Example metadata cues - multiple counts
+
+NOTE Discrete data streams with cues of the same type
+
+00:00:00.000 --> 00:00:01.000
+{ "sync": { "type": "org.webvmt.example.count.down", "data": 5 } }
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 0 } }
+
+00:00:01.000 --> 00:00:02.000
+{ "sync": { "type": "org.webvmt.example.count.down", "data": 4 } }
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 1 } }
+
+00:00:02.000 --> 00:00:03.000
+{ "sync": { "type": "org.webvmt.example.count.down", "data": 3 } }
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 2 } }
+
+00:00:03.000 --> 00:00:03.500
+{ "sync": { "type": "org.webvmt.example.count.down", "data": 2 } }
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 3 } }
+
+00:00:03.500 --> 00:00:04.000
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 3.5 } }
+
+00:00:04.000 --> 00:00:04.500
+{ "sync": { "type": "org.webvmt.example.count.down", "data": 1 } }
+
+00:00:04.000 --> 00:00:04.250
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 4 } }
+
+00:00:04.250 --> 00:00:04.500
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 4.25 } }
+
+00:00:04.500 --> 00:00:04.750
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 4.5 } }
+
+00:00:04.750 --> 00:00:05.000
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 4.75 } }
+
+00:00:05.000 --> 00:00:05.500
+{ "sync": { "type": "org.webvmt.example.count.down", "data": 0 } }
+{ "sync": { "type": "org.webvmt.example.count.up", "data": 5 } }

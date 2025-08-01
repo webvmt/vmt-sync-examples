@@ -1,0 +1,39 @@
+WEBVMT
+
+MEDIA
+url:big_buck_bunny_720p_1mb.mp4
+mime-type:video/mp4
+
+NOTE Example metadata cues
+
+00:00:00.000 --> 00:00:01.000
+{ "sync": { "type": "org.webvmt.example.count", "data": 5 } }
+
+00:00:01.000 --> 00:00:02.000
+{ "sync": { "type": "org.webvmt.example.count", "data": 4 } }
+
+00:00:01.500 --> 00:00:02.500
+{ "sync": { "type": "org.webvmt.example.colour",
+    "data": { "background": "blue", "foreground": "white" } } }
+
+00:00:02.000 --> 00:00:03.000
+{ "sync": { "type": "org.webvmt.example.count", "data": 3 } }
+
+00:00:02.500 --> 00:00:03.200
+{ "sync": { "type": "org.webvmt.example.colour",
+    "data": { "background": "green", "foreground": "lightsalmon" } } }
+
+00:00:03.000 --> 00:00:03.500
+{ "sync": { "type": "org.webvmt.example.count", "data": 2 } }
+
+00:00:03.700 --> 00:00:05.000
+{ "sync": { "type": "org.webvmt.example.colour",
+    "data": { "background": "purple", "foreground": "gold" } } }
+
+00:00:04.000 --> 00:00:04.500
+{ "sync": { "type": "org.webvmt.example.count", "data": 1 } }
+
+00:00:05.000 --> 00:00:05.500
+{ "sync": { "type": "org.webvmt.example.count", "data": 0 } }
+{ "sync": { "type": "org.webvmt.example.colour",
+    "data": { "background": "red", "foreground": "cyan" } } }
