@@ -4,7 +4,7 @@
 
 These examples show how timed metadata can be synchronised with video using the [WebVMT sync command](https://www.w3.org/TR/webvmt/#synchronized-data) and accessed with [DataCue](https://wicg.github.io/datacue/#datacue-interface) or a custom [TextTrackCue](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue) in a web page
 
-![DataCue example web page with console log]("images/DataCue_ConsoleFirefox.jpg")  
+![DataCue example web page with console log](images/DataCue_ConsoleFirefox.jpg)  
 _DataCue example web page with console log_
 
 ### Data types
