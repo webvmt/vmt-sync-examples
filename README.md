@@ -42,7 +42,7 @@ The basic design to access timed metadata in a web page using WebVMT is:
 
 In this example, `count` and `colour` cues are delivered by a single track using `DataCue`.
 
-* [DataCue example](datacue.html)
+* [DataCue example](https://webvmt.github.io/vmt-sync-examples/datacue.html)
 
 ### Code variations
 
@@ -63,7 +63,7 @@ Unbounded cues can be overridden by a later cue of the same type as shown in the
 
 In this example, bounded cues are replaced with unbounded cues, so no cue refers to a future time.
 
-* [Streaming example](streaming.html)
+* [Streaming example](https://webvmt.github.io/vmt-sync-examples/streaming.html)
 
 #### <a id='custom-cues'></a>Custom cues
 
@@ -74,7 +74,7 @@ All cues must be derived from `TextTrackCue` in order to integrate with `TextTra
 
 In this example, `count` and `colour` cues are delivered using custom `CountCue` and `ColourCue` classes instead of `DataCue`. Custom cue definitions can be found in the [custom-cues](custom-cues) directory.
 
-* [Custom cue example](custom-cue.html)
+* [Custom cue example](https://webvmt.github.io/vmt-sync-examples/custom-cue.html)
 
 #### <a id='duplicate-types'></a>Duplicate data types
 
@@ -84,7 +84,7 @@ Cue types should contain sufficient detail to allow proper identification and in
 
 In this example, `colour` cues are replaced by a second `count` stream which does not interfere with the first.
 
-* [Multiple count example](multi-count.html)
+* [Multiple count example](https://webvmt.github.io/vmt-sync-examples/multi-count.html)
 
 #### <a id='multiple-tracks'></a>Multiple tracks
 
@@ -92,4 +92,4 @@ Data from multiple VMT files can be merged into a single VMT file without any pe
 
 In this example, `colour` and `count` cues are read from two discrete VMT files by two discrete tracks which are both synchronised with the same video.
 
-* [Multiple track example](multi-track.html)
+* [Multiple track example](https://webvmt.github.io/vmt-sync-examples/multi-track.html)
