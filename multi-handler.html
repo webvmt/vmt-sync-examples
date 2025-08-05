@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multiple Counts Example</title>
+        <title>Multiple Handler Example</title>
         <!-- polyfill -->
         <script type="text/javascript" src="polyfills/texttrackcuepolyfill-texttrack.js"></script>
  
@@ -12,20 +12,21 @@
         <!-- example code -->
         <link rel="stylesheet" href="css/common-example.css">
         <script type="text/javascript" src="js/common-example.js"></script>
-        <script type="text/javascript" src="js/multi-count-example.js"></script>
+        <script type="text/javascript" src="js/count-example.js"></script>
+        <script type="text/javascript" src="js/colour-example.js"></script>
     </head>
     <body>
         <div class="video-wrapper">
             <video id="video-player" controls src="media/big_buck_bunny_720p_1mb.mp4" width="672" height="378">
-                <track src="vmt/multi-count-cues.vmt" kind="metadata" />
+                <track src="vmt/mixed-cues.vmt" kind="metadata" />
                 Your browser does not support HTML5 video.
             </video>
 
             <div class="content-padding">
                 <span>Count: </span>
                 <div id="count" class="count"></div>
-                <span>&nbsp;Another Count: </span>
-                <div id="count-2" class="count"></div>
+                <span>&nbsp;Colour: </span>
+                <div id="colour" class="colour">&nbsp;&#9679;</div>
             </div>
         </div>
     </body>

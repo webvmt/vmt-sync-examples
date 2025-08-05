@@ -8,17 +8,17 @@ var count = null;
 function init_count() {    	
     // load metadata
     const video = document.getElementById('video-player');
-    const track = video.getElementsByTagName('track')[0];
-    const vmtFilename = track.getAttribute('src');
-    const textTrack = track.track;
-    textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
-    loadVmtFile(vmtFilename, function(vmtSync) {
-        var cues = syncToCues(vmtSync, false); // disable custom cues
-        addCuesToTrack(cues, textTrack, handleCueEnter_count, handleCueExit_count);
-    });
-    
-    // connect metadata listener
-    //video.textTracks.addEventListener('change', handleTrackListChange);
+    for (const track of video.getElementsByTagName('track')) {
+        const vmtFilename = track.getAttribute('src');
+        const textTrack = track.track;
+        textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
+        loadVmtFile(vmtFilename, function(vmtSync) {
+            var cues = syncToCues(vmtSync, false); // prohibit custom cues
+            addCuesToTrack(cues, textTrack, handleCueEnter_count, handleCueExit_count); // add cues with handlers
+        });
+
+        //textTrack.addEventListener('cuechange', handleTrackCuesChange_count);
+    }
     
     // connect display
     count = document.getElementById('count');
@@ -46,10 +46,12 @@ function handleCueEnter_count(event) {
                 */
                 
                 default:
+                    break;
             }
             break;
     		
     	default:
+            break;
     }
 }
 
@@ -80,11 +82,18 @@ function handleCueExit_count(event) {
                 */
                     
                 default:
+                    break;
             }
             break;
     	
     	default:
+            break;
     }
+}
+
+function handleTrackCuesChange_count(event) {
+    const cues = event.target;
+    console.log('track cues change');
 }
 
 window.addEventListener('load', init_count);
