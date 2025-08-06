@@ -93,3 +93,11 @@ Data from multiple VMT files can be merged into a single VMT file without any pe
 In this example, `colour` and `count` cues are read from two discrete VMT files by two discrete tracks which are both synchronised with the same video.
 
 * [Multiple track example](https://webvmt.github.io/vmt-sync-examples/multi-track.html)
+
+#### <a id='multiple-handler'></a>Multiple handlers
+
+Data may be processed for different purposes by discrete event handlers that are agnostic of each other. Handlers written by different developers may appear in the same web page and process data cues from the same video. For example, geotagged video may be processed by a page to provide location services and by advertisers on that page to personalise content.
+
+In this example, `colour` and `count` cues are processed separately by two discrete cue handlers that are agnostic of each other.
+
+* [Multiple handler example](https://webvmt.github.io/vmt-sync-examples/multi-handler.html)
