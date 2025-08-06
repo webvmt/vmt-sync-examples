@@ -54,6 +54,7 @@ Code variations are:
  1. [Custom cues](#custom-cues) for tailored access
  1. [Duplicate data types](#duplicate-types) to distinguish similar data streams
  1. [Multiple tracks](#multiple-tracks) to merge data streams
+ 1. [Multiple handlers](#multiple-handlers) that independently process the same data stream
 
 #### <a id='streaming'></a>Streaming cues
 
@@ -78,7 +79,7 @@ In this example, `count` and `colour` cues are delivered using custom `CountCue`
 
 #### <a id='duplicate-types'></a>Duplicate data types
 
-Multiple data streams of a similar type may need to be distinguished. For example, a theatre or music venue may include several stage lights of the same type which need to be controlled independently of each other for a live screening event.
+Multiple data streams of the same type may need to be distinguished. For example, a theatre or music venue may include several stage lights of the same type which need to be controlled independently of each other for a live screening event.
 
 Cue types should contain sufficient detail to allow proper identification and interpretation of timed metadata. The following example displays two discrete counts which are identified and handled correctly.
 
@@ -94,7 +95,7 @@ In this example, `colour` and `count` cues are read from two discrete VMT files 
 
 * [Multiple track example](https://webvmt.github.io/vmt-sync-examples/multi-track.html)
 
-#### <a id='multiple-handler'></a>Multiple handlers
+#### <a id='multiple-handlers'></a>Multiple handlers
 
 Data may be processed for different purposes by discrete event handlers that are agnostic of each other. Handlers written by different developers may appear in the same web page and process data cues from the same video. For example, geotagged video may be processed by a page to provide location services and by advertisers on that page to personalise content.
 
