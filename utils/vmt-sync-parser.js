@@ -146,7 +146,7 @@ function parseTag(obj) {
     // parse sync tag
     if (obj.hasOwnProperty('sync')) { // valid
         // parse attributes
-        tag = parseAttribs(obj.sync, {type: 0, data: 1, end: 2});
+        tag = parseAttribs(obj.sync, {type: 0, id:1, data: 2, end: 3});
         tag.name = 'sync';
         // add end if required
         if (!tag.hasOwnProperty('end')) {

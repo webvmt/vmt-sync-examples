@@ -27,17 +27,21 @@ function syncToCues(vmtSync, allowCustomCues) {
 
                     default:
                         cue.class = DataCuePolyfill;
-                        cue.content = {type: dataCues[c].type, value: dataCues[c].data};
+                        cue.content = {type: dataCueType(dataCues[c]), value: dataCues[c].data};
                         break;
                 }
             } else {
                 cue.class = DataCuePolyfill;
-                cue.content = {type: dataCues[c].type, value: dataCues[c].data};
+                cue.content = {type: dataCueType(dataCues[c]), value: dataCues[c].data};
             }
             cues.push(cue);
         }
     }
     return cues;
+}
+
+function dataCueType(sync) {
+    return (sync.hasOwnProperty('id') ? sync.type + '.' + sync.id : sync.type);
 }
 
 function addCuesToTrack(cues, track, onEnter, onExit) {
@@ -79,6 +83,7 @@ function getCueContent(cue) {
             break;
             
         default:
+            break;
     }
     return content;
 }

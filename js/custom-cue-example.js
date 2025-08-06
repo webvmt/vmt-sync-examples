@@ -8,17 +8,17 @@ var colour = null;
 function init() {    	
     // load metadata
     const video = document.getElementById('video-player');
-    const track = video.getElementsByTagName('track')[0];
-    const vmtFilename = track.getAttribute('src');
-    const textTrack = track.track;
-    textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
-    loadVmtFile(vmtFilename, function(vmtSync) {
-        var cues = syncToCues(vmtSync, true); // allow custom cues
-        addCuesToTrack(cues, textTrack, handleCueEnter, handleCueExit);
-    });
-    
-    // connect metadata listener
-    //video.textTracks.addEventListener('change', handleTrackListChange);
+    for (const track of video.getElementsByTagName('track')) {
+        const vmtFilename = track.getAttribute('src');
+        const textTrack = track.track;
+        textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
+        loadVmtFile(vmtFilename, function(vmtSync) {
+            var cues = syncToCues(vmtSync, true); // allow custom cues
+            addCuesToTrack(cues, textTrack, handleCueEnter, handleCueExit); // add cues with handlers
+        });
+
+        //textTrack.addEventListener('cuechange', handleTrackCuesChange);
+    }
     
     // connect display
     count = document.getElementById('count');
@@ -42,6 +42,7 @@ function handleCueEnter(event) {
             break;
     		
     	default:
+            break;
     }
 }
 
@@ -68,7 +69,13 @@ function handleCueExit(event) {
             break;
     	
     	default:
+            break;
     }
+}
+
+function handleTrackCuesChange(event) {
+    const cues = event.target;
+    console.log('track cues change');
 }
 
 window.addEventListener('load', init);

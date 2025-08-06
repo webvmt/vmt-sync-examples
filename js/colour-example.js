@@ -8,14 +8,17 @@ var colour = null;
 function init_colour() {    	
     // load metadata
     const video = document.getElementById('video-player');
-    const track = video.getElementsByTagName('track')[1];
-    const vmtFilename = track.getAttribute('src');
-    const textTrack = track.track;
-    textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
-    loadVmtFile(vmtFilename, function(vmtSync) {
-        var cues = syncToCues(vmtSync, false); // disable custom cues
-        addCuesToTrack(cues, textTrack, handleCueEnter_colour, handleCueExit_colour);
-    });
+    for (const track of video.getElementsByTagName('track')) {
+        const vmtFilename = track.getAttribute('src');
+        const textTrack = track.track;
+        textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
+        loadVmtFile(vmtFilename, function(vmtSync) {
+            var cues = syncToCues(vmtSync, false); // prohibit custom cues
+            addCuesToTrack(cues, textTrack, handleCueEnter_colour, handleCueExit_colour); // add cues with handlers
+        });
+
+        //textTrack.addEventListener('cuechange', handleTrackCuesChange_colour);
+    }
     
     // connect display
     //count = document.getElementById('count');
@@ -43,10 +46,12 @@ function handleCueEnter_colour(event) {
                     break;
                 
                 default:
+                    break;
             }
             break;
     		
     	default:
+            break;
     }
 }
 
@@ -77,11 +82,18 @@ function handleCueExit_colour(event) {
                     break;
                     
                 default:
+                    break;
             }
             break;
     	
     	default:
+            break;
     }
+}
+
+function handleTrackCuesChange_colour(event) {
+    const cues = event.target;
+    console.log('track cues change');
 }
 
 window.addEventListener('load', init_colour);

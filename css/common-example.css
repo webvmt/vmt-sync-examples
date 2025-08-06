@@ -1,0 +1,25 @@
+/*
+ * (c) Copyright 2025 Away Team Software (www.awayteam.co.uk)
+ */
+
+.video-wrapper {
+    margin: auto;
+    width: 672px;
+}
+
+.count {
+    display: inline-block;
+    width: 24px;
+}
+
+.colour {
+    display: inline-block;
+    border-radius: 6px;
+    width: 18px;
+}
+
+.content-padding:after {
+    content: '';
+    display: block;
+    clear: both;
+}
