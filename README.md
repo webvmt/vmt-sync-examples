@@ -40,6 +40,8 @@ The basic design to access timed metadata in a web page using WebVMT is:
    G(Data consumer)
  ````
 
+#### Example
+
 In this example, `count` and `colour` cues are delivered by a single track using `DataCue`.
 
  * [DataCue example](https://webvmt.github.io/vmt-sync-examples/datacue.html)
@@ -77,9 +79,11 @@ Live streaming use cases can include cues with a known start time and content, b
 
 Unbounded cues can be overridden by a later cue of the same type as shown in the [streaming.vmt](vmt/streaming.vmt) file. This file produces the same net result as the bounded cues in [mixed.vmt](vmt/mixed.vmt), but without referring to any _future_ time.
 
+#### Example
+
 In this example, bounded cues are replaced with unbounded cues, so no cue refers to a future time.
 
-* [Streaming example](https://webvmt.github.io/vmt-sync-examples/streaming.html)
+ * [Streaming example](https://webvmt.github.io/vmt-sync-examples/streaming.html)
 
 ### <a id='custom-cues'></a>Custom cues
 
@@ -87,16 +91,19 @@ Custom cues can be used to define cue content and functions with which to access
 
 All cues must be derived from `TextTrackCue` in order to integrate with `TextTrack`. `DataCue` and `VTTCue` are examples of cues for timed data and timed text respectively. [Users may define their own custom cues](https://html.spec.whatwg.org/multipage/media.html#guidelines-for-exposing-cues-in-various-formats-as-text-track-cues) derived from either of these classes, or directly from `TextTrackCue` using a [polyfill](polyfills).
 
+#### Example
 
 In this example, `count` and `colour` cues are delivered using custom `CountCue` and `ColourCue` classes instead of `DataCue`. Custom cue definitions can be found in the [custom-cues](custom-cues) directory.
 
 * [Custom cue example](https://webvmt.github.io/vmt-sync-examples/custom-cue.html)
 
-### <a id='duplicate-types'></a>Duplicate data types
+### <a id='duplicate-types'></a>Duplicate cue types
 
 Multiple data streams of the same type may need to be distinguished. For example, a theatre or music venue may include several stage lights of the same type which need to be controlled independently of each other for a live screening event.
 
 Cue types should contain sufficient detail to allow proper identification and interpretation of timed metadata. The following example displays two discrete counts which are identified and handled correctly.
+
+#### Example
 
 In this example, `colour` cues are replaced by a second `count` stream which does not interfere with the first.
 
@@ -106,6 +113,8 @@ In this example, `colour` cues are replaced by a second `count` stream which doe
 
 Data from multiple VMT files can be merged into a single VMT file without any penalty, though there may be reasons why this is impractical. For example, data from discrete sources may need to be retained in their original form to preserve integrity as admissible evidence.
 
+#### Example
+
 In this example, `colour` and `count` cues are read from two discrete VMT files by two discrete tracks which are both synchronised with the same video.
 
 * [Multiple track example](https://webvmt.github.io/vmt-sync-examples/multi-track.html)
@@ -113,6 +122,8 @@ In this example, `colour` and `count` cues are read from two discrete VMT files 
 ### <a id='multiple-handlers'></a>Multiple listeners
 
 Data may be processed for different purposes by discrete event listeners that are agnostic of each other. Handler code written by different developers may appear in the same web page and process data cues from the same video. For example, geotagged video may be processed by a page to provide location services and by advertisers on that page to personalise content.
+
+#### Example
 
 In this example, `colour` and `count` cues are processed separately by two discrete cue handlers that are agnostic of each other.
 
