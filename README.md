@@ -69,7 +69,7 @@ Code variations are:
 
  1. [Streaming cues](#streaming) for live streaming
  1. [Custom cues](#custom-cues) for tailored access
- 1. [Duplicate data types](#duplicate-types) to distinguish similar data streams
+ 1. [Duplicate cue types](#duplicate-types) to distinguish similar data streams
  1. [Multiple tracks](#multiple-tracks) to merge data streams
  1. [Multiple listeners](#multiple-handlers) that independently process the same data stream
 
