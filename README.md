@@ -26,18 +26,19 @@ The basic design to access timed metadata in a web page using WebVMT is:
 
  ````mermaid
  graph TD
-   A(VMT file) --> |Parse| B
-   B("WebVMT sync
-   commands") --> |Create| C
-   C(DataCues) --> |"Add event
-   handlers"| E
-   B --> |Create| D(Custom cues)
-   D --> |"Add event
-   handlers"| E
-   E("Cues with
-   handlers") --> |Add| F
-   F(TextTrack) --> |Cue events| G
-   G(Data consumer)
+    A(VMT file) --> |Parse| B
+    B("WebVMT sync
+    commands") --> |Create| C
+    C(DataCues) --> |"Add event
+    handlers"| E
+    B --> |Create| D(Custom cues)
+    D --> |"Add event
+    handlers"| E
+    E("Cues with
+    handlers") --> |Add| F
+    F(TextTrack) --> |Cue events| G
+    G("Event
+    handlers")
  ````
 
 #### Example
@@ -62,7 +63,7 @@ cue types")
   D("Multiple
 tracks")
   E("Multiple
-listeners")
+handlers")
 ````
 
 Code variations are:
@@ -71,7 +72,7 @@ Code variations are:
  1. [Custom cues](#custom-cues) for tailored access
  1. [Duplicate cue types](#duplicate-types) to distinguish similar data streams
  1. [Multiple tracks](#multiple-tracks) to merge data streams
- 1. [Multiple listeners](#multiple-handlers) that independently process the same data stream
+ 1. [Multiple handlers](#multiple-handlers) that independently process the same data stream
 
 ### <a id='streaming'></a>Streaming cues
 
@@ -119,7 +120,7 @@ In this example, `colour` and `count` cues are read from two discrete VMT files 
 
 * [Multiple track example](https://webvmt.github.io/vmt-sync-examples/multi-track.html)
 
-### <a id='multiple-handlers'></a>Multiple listeners
+### <a id='multiple-handlers'></a>Multiple handlers
 
 Data may be processed for different purposes by discrete event listeners that are agnostic of each other. Handler code written by different developers may appear in the same web page and process data cues from the same video. For example, geotagged video may be processed by a page to provide location services and by advertisers on that page to personalise content.
 
@@ -127,4 +128,4 @@ Data may be processed for different purposes by discrete event listeners that ar
 
 In this example, `colour` and `count` cues are processed separately by two discrete cue handlers that are agnostic of each other.
 
-* [Multiple listener example](https://webvmt.github.io/vmt-sync-examples/multi-handler.html)
+* [Multiple handler example](https://webvmt.github.io/vmt-sync-examples/multi-handler.html)
