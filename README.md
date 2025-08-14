@@ -37,8 +37,7 @@ The basic design to access timed metadata in a web page using WebVMT is:
     E("Cues with
     handlers") --> |Add| F
     F(TextTrack) --> |Cue events| G
-    G("Event
-    handlers")
+    G(Event handlers)
  ````
 
 #### Example

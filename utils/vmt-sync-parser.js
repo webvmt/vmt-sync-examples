@@ -146,7 +146,7 @@ function parseTag(obj) {
     // parse sync tag
     if (obj.hasOwnProperty('sync')) { // valid
         // parse attributes
-        tag = parseAttribs(obj.sync, {type: 0, id:1, data: 2, end: 3});
+        tag = parseAttribs(obj.sync, {type: 0, id:1, data: 2, end: 3, dur: 4});
         tag.name = 'sync';
         // add end if required
         if (!tag.hasOwnProperty('end')) {
@@ -170,4 +170,8 @@ function parseAttribs(obj, tag) {
         }
     }
     return attribs;
+}
+
+function getSyncTime(syncEnd, cueStart) {
+    return (syncEnd != undefined ? syncEnd : cueStart);
 }
