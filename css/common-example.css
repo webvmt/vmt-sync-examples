@@ -7,9 +7,17 @@
     width: 672px;
 }
 
+.count-frame {
+    display: inline-block;
+}
+
 .count {
     display: inline-block;
     width: 24px;
+}
+
+.colour-frame {
+    display: inline-block;
 }
 
 .colour {
@@ -18,8 +26,6 @@
     width: 18px;
 }
 
-.content-padding:after {
-    content: '';
-    display: block;
-    clear: both;
+.cues-disabled {
+    opacity: 0.4;
 }

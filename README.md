@@ -14,7 +14,7 @@ Example code focuses on a video synchronised with two disparate types of timed m
  * `count` cues which contain a single number
  * `colour` cues which contain a structured object with `foreground` and `background` attributes
 
-### Code design
+### <a id='code-design'></a>Code design
 
 The basic design to access timed metadata in a web page using WebVMT is:
 
@@ -25,79 +25,105 @@ The basic design to access timed metadata in a web page using WebVMT is:
  1. Process timed data using event handlers.
 
  ````mermaid
- graph TD;
-   A(VMT file) --> |Parse| B;
-   B("WebVMT sync
-   commands") --> |Create| C;
-   C(DataCues) --> |"Add event
-   handlers"| E;
-   B --> |Create| D(Custom cues);
-   D --> |"Add event
-   handlers"| E;
-   E("Cues with
-   handlers") --> |Add| F;
-   F(TextTrack) --> |Cue events| G;
-   G(Data consumer);
+ graph TD
+    A(VMT file) --> |Parse| B
+    B("WebVMT sync
+    commands") --> |Create| C
+    C(DataCues) --> |"Add event
+    handlers"| E
+    B --> |Create| D(Custom cues)
+    D --> |"Add event
+    handlers"| E
+    E("Cues with
+    handlers") --> |Add| F
+    F(TextTrack) --> |Cue events| G
+    G(Event handlers)
  ````
+
+#### Example
 
 In this example, `count` and `colour` cues are delivered by a single track using `DataCue`.
 
-* [DataCue example](https://webvmt.github.io/vmt-sync-examples/datacue.html)
+ * [DataCue example](https://webvmt.github.io/vmt-sync-examples/datacue.html)
 
-### Code variations
+## Code variations
 
-Each variation is based on the basic design above, but demonstrates how a single additional feature can be integrated with this design. Many variations produce the same net result as the basic design, though underlying differences can be observed in the `console.log` output.
+Each variation is based on the [basic design above](#code-design), but demonstrates how a single additional feature can be integrated with this design. Many variations can produce the same net result as the basic design, though underlying differences can be observed in the `console.log` output.
+
+````mermaid
+mindmap
+((DataCue))
+  A("Streaming
+cues")
+  B("Custom
+cues")
+  C("Duplicate
+cue types")
+  D("Multiple
+tracks")
+  E("Multiple
+handlers")
+````
 
 Code variations are:
 
  1. [Streaming cues](#streaming) for live streaming
  1. [Custom cues](#custom-cues) for tailored access
- 1. [Duplicate data types](#duplicate-types) to distinguish similar data streams
+ 1. [Duplicate cue types](#duplicate-types) to distinguish similar data streams
  1. [Multiple tracks](#multiple-tracks) to merge data streams
  1. [Multiple handlers](#multiple-handlers) that independently process the same data stream
 
-#### <a id='streaming'></a>Streaming cues
+### <a id='streaming'></a>Streaming cues
 
 Live streaming use cases can include cues with a known start time and content, but an _unknown_ end time - which may become known in the future. These [unbounded cues](https://html.spec.whatwg.org/multipage/media.html#unbounded-text-track-cue) can be represented in a VMT file by omitting the cue end time.
 
 Unbounded cues can be overridden by a later cue of the same type as shown in the [streaming.vmt](vmt/streaming.vmt) file. This file produces the same net result as the bounded cues in [mixed.vmt](vmt/mixed.vmt), but without referring to any _future_ time.
 
+#### Example
+
 In this example, bounded cues are replaced with unbounded cues, so no cue refers to a future time.
 
-* [Streaming example](https://webvmt.github.io/vmt-sync-examples/streaming.html)
+ * [Streaming example](https://webvmt.github.io/vmt-sync-examples/streaming.html)
 
-#### <a id='custom-cues'></a>Custom cues
+### <a id='custom-cues'></a>Custom cues
 
 Custom cues can be used to define cue content and functions with which to access content for a particular use case. For example, a geographical location cue may include functions to return speed and distance travelled.
 
 All cues must be derived from `TextTrackCue` in order to integrate with `TextTrack`. `DataCue` and `VTTCue` are examples of cues for timed data and timed text respectively. [Users may define their own custom cues](https://html.spec.whatwg.org/multipage/media.html#guidelines-for-exposing-cues-in-various-formats-as-text-track-cues) derived from either of these classes, or directly from `TextTrackCue` using a [polyfill](polyfills).
 
+#### Example
 
 In this example, `count` and `colour` cues are delivered using custom `CountCue` and `ColourCue` classes instead of `DataCue`. Custom cue definitions can be found in the [custom-cues](custom-cues) directory.
 
 * [Custom cue example](https://webvmt.github.io/vmt-sync-examples/custom-cue.html)
 
-#### <a id='duplicate-types'></a>Duplicate data types
+### <a id='duplicate-types'></a>Duplicate cue types
 
 Multiple data streams of the same type may need to be distinguished. For example, a theatre or music venue may include several stage lights of the same type which need to be controlled independently of each other for a live screening event.
 
 Cue types should contain sufficient detail to allow proper identification and interpretation of timed metadata. The following example displays two discrete counts which are identified and handled correctly.
 
+#### Example
+
 In this example, `colour` cues are replaced by a second `count` stream which does not interfere with the first.
 
 * [Multiple count example](https://webvmt.github.io/vmt-sync-examples/multi-count.html)
 
-#### <a id='multiple-tracks'></a>Multiple tracks
+### <a id='multiple-tracks'></a>Multiple tracks
 
 Data from multiple VMT files can be merged into a single VMT file without any penalty, though there may be reasons why this is impractical. For example, data from discrete sources may need to be retained in their original form to preserve integrity as admissible evidence.
+
+#### Example
 
 In this example, `colour` and `count` cues are read from two discrete VMT files by two discrete tracks which are both synchronised with the same video.
 
 * [Multiple track example](https://webvmt.github.io/vmt-sync-examples/multi-track.html)
 
-#### <a id='multiple-handlers'></a>Multiple handlers
+### <a id='multiple-handlers'></a>Multiple handlers
 
-Data may be processed for different purposes by discrete event handlers that are agnostic of each other. Handlers written by different developers may appear in the same web page and process data cues from the same video. For example, geotagged video may be processed by a page to provide location services and by advertisers on that page to personalise content.
+Data may be processed for different purposes by discrete event listeners that are agnostic of each other. Handler code written by different developers may appear in the same web page and process data cues from the same video. For example, geotagged video may be processed by a page to provide location services and by advertisers on that page to personalise content.
+
+#### Example
 
 In this example, `colour` and `count` cues are processed separately by two discrete cue handlers that are agnostic of each other.
 
