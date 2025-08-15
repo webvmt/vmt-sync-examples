@@ -28,14 +28,14 @@ The basic design to access timed metadata in a web page using WebVMT is:
  graph TD
     A(VMT file) --> |Parse| B
     B("WebVMT sync
-    commands") --> |Create| C
+     commands") --> |Create| C
     C(DataCues) --> |"Add event
-    handlers"| E
+     handlers"| E
     B --> |Create| D(Custom cues)
     D --> |"Add event
-    handlers"| E
+     handlers"| E
     E("Cues with
-    handlers") --> |Add| F
+     handlers") --> |Add| F
     F(TextTrack) --> |Cue events| G
     G(Event handlers)
  ```
