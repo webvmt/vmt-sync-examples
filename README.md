@@ -24,7 +24,7 @@ The basic design to access timed metadata in a web page using WebVMT is:
  1. Add all these cues to `TextTrack` to synchronise them with a video.
  1. Process timed data using event handlers.
 
- ````mermaid
+ ```mermaid
  graph TD
     A(VMT file) --> |Parse| B
     B("WebVMT sync
@@ -38,7 +38,7 @@ The basic design to access timed metadata in a web page using WebVMT is:
     handlers") --> |Add| F
     F(TextTrack) --> |Cue events| G
     G(Event handlers)
- ````
+ ```
 
 #### Example
 
@@ -50,7 +50,7 @@ In this example, `count` and `colour` cues are delivered by a single track using
 
 Each variation is based on the [basic design above](#code-design), but demonstrates how a single additional feature can be integrated with this design. Many variations can produce the same net result as the basic design, though underlying differences can be observed in the `console.log` output.
 
-````mermaid
+```mermaid
 mindmap
 ((DataCue))
   A("Streaming
@@ -63,7 +63,7 @@ cue types")
 tracks")
   E("Multiple
 handlers")
-````
+```
 
 Code variations are:
 
