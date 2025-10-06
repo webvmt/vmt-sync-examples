@@ -74,7 +74,7 @@ Code variations are:
  1. [Duplicate cue types](#duplicate-types) to distinguish similar data streams
  1. [Multiple tracks](#multiple-tracks) to merge data streams
  1. [Multiple handlers](#multiple-handlers) that independently process the same data stream
- 1. [Track events](#track-events) for appropriate response
+ 1. [Track events](#track-events) for cue change responses
 
 ### <a id='streaming'></a>Streaming cues
 
