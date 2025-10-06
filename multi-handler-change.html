@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multiple Handler Example</title>
+        <title>Multiple Handler Example With Track Events</title>
         <!-- polyfill -->
         <script type="text/javascript" src="polyfills/texttrackcuepolyfill-texttrack.js"></script>
  
@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="css/common-example.css">
         <script type="text/javascript" src="js/common-example.js"></script>
         <script>
-            <!-- handle cue enter & exit events only (default behaviour) -->
-            const vmtSyncExample = {cueEvent: true};
+            <!-- handle track events only -->
+            const vmtSyncExample = {cueEvent: false};
         </script>
         <script type="text/javascript" src="js/count-example.js"></script>
         <script type="text/javascript" src="js/colour-example.js"></script>

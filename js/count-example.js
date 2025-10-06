@@ -4,8 +4,13 @@
 
 var count = null;
 //var colour = null;
+var options;
+var previousLatestTime = -Infinity;
 
-function init_count() {    	
+function init_count() {
+    // set example options
+    const defaults = {cueEvent: true};
+    options = setExampleOptions(defaults); // in common-example.js
     // load metadata
     const video = document.getElementById('video-player');
     for (const track of video.getElementsByTagName('track')) {
@@ -14,10 +19,13 @@ function init_count() {
         textTrack.mode = 'showing'; // ensure cues are "loaded" - see MDN
         loadVmtFile(vmtFilename, function(vmtSync) {
             var cues = syncToCues(vmtSync, false); // prohibit custom cues
-            addCuesToTrack(cues, textTrack, handleCueEnter_count, handleCueExit_count); // add cues with handlers
+            const handleEnter = (options.cueEvent ? handleCueEnter_count : undefined);
+            const handleExit = (options.cueEvent ? handleCueExit_count : undefined);
+            addCuesToTrack(cues, textTrack, handleEnter, handleExit); // add cues with handlers
         });
 
-        //textTrack.addEventListener('cuechange', handleTrackCuesChange_count);
+        const handleCuesChange = (!options.cueEvent ? handleTrackCuesChange_count : undefined);
+        textTrack.addEventListener('cuechange', handleCuesChange);
     }
     
     // connect display
@@ -35,13 +43,12 @@ function handleCueEnter_count(event) {
     	case 'DataCuePolyfill':
             switch (content.type) {
                 case 'org.webvmt.example.count':
-                    count.innerHTML = content.value;
+                    showCountActive(content.value);
                     break;
-        
+
                 /*
                 case 'org.webvmt.example.colour':
-                    colour.style['background-color'] = content.value.background;
-                    colour.style['color'] = content.value.foreground;
+                    showColourActive(content.value);
                     break;
                 */
                 
@@ -53,6 +60,7 @@ function handleCueEnter_count(event) {
     	default:
             break;
     }
+    previousLatestTime = -Infinity; // reset
 }
 
 function handleCueExit_count(event) {
@@ -66,17 +74,14 @@ function handleCueExit_count(event) {
             switch (content.type) {
                 case 'org.webvmt.example.count':
                     if (count.innerHTML == content.value) { // exit current state
-                        count.innerHTML = '';
+                        showCountInactive();
                     }
                     break;
 
                 /*
                 case 'org.webvmt.example.colour':
-                    if (colour.style['background-color'] == content.value.background) { // exit current state
-                        colour.style['background-color'] = '';
-                    }
-                    if (colour.style['color'] == content.value.foreground) { // exit current state
-                        colour.style['color'] = '';
+                    if ((colour.style['background-color'] == content.value.background) && (colour.style['color'] == content.value.foreground)) { // exit current state
+                        showColourInactive(); 
                     }
                     break;
                 */
@@ -89,11 +94,80 @@ function handleCueExit_count(event) {
     	default:
             break;
     }
+    
+    // unbounded cues only exit on rewind, so update display using active list
+    if (cue.endTime == Infinity || cue.endTime == Number.MAX_VALUE) { // unbounded
+        // rewind - check active cues
+        const textTrack = cue.track; 
+        if (textTrack) { // associated track
+            const latestTime = getLatestStartTime(textTrack.activeCues);
+            if (latestTime != previousLatestTime) { // avoid repetition
+                showCues(textTrack.activeCues);
+                previousLatestTime = latestTime;
+            }
+        }
+    }
 }
 
+function showCountActive(value) {
+    count.innerHTML = value;
+}
+
+function showCountInactive() {
+    count.innerHTML = '';
+}
+/*
+function showColourActive(value) {
+    colour.style['background-color'] = value.background;
+    colour.style['color'] = value.foreground;
+}
+
+function showColourInactive() {
+    colour.style['background-color'] = '';
+    colour.style['color'] = '';
+}
+*/
 function handleTrackCuesChange_count(event) {
-    const cues = event.target;
-    console.log('track cues change');
+    const textTrack = event.target;
+    const id = (textTrack.id ? textTrack.id : '');
+    console.log('cues change on track ' + id);
+    
+    // inactive by default
+    showCountInactive();
+    //showColourInactive();
+    
+    // active cues
+    showCues_count(textTrack.activeCues);
+}
+
+function showCues_count(cueList) {
+    for (const cue of cueList) {
+        const content = getCueContent(cue);
+        const logContent = (typeof content == 'object' ? '{' + toString(content) + '}' : content);
+        console.log('cue active @ ' + cue.startTime.toFixed(SECS_DP) + ' - class: ' + cue.constructor.name + ', content: ' + logContent);
+
+        switch (cue.constructor.name) {
+            case 'DataCuePolyfill':
+                switch (content.type) {
+                    case 'org.webvmt.example.count':
+                        showCountActive(content.value);
+                        break;
+
+                    /*
+                    case 'org.webvmt.example.colour':
+                        showColourActive(content.value);
+                        break;
+                    */
+
+                    default:
+                        break;
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
 }
 
 window.addEventListener('load', init_count);
