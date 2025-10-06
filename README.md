@@ -157,7 +157,7 @@ The best choice of event type may depend on the processing action rather than th
 
 In this example, `colour` and `count` cue updates are triggered by any change in the active cue states.
 
-* [Track events example](https://webvmt.github.io/vmt-sync-examples/datacue-track-events.html)
+* [Track events example](https://webvmt.github.io/vmt-sync-examples/datacue-change.html)
 
 #### Comparison of cue and track events
 
