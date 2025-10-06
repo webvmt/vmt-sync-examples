@@ -148,7 +148,8 @@ graph TD
     D --> |Add| E
     E("TextTrack
     with handler") --> |Track events| F
-    F(Event handlers)```
+    F(Event handlers)
+```
 
 The best choice of event type may depend on the processing action rather than the cue content. For example, track events are well-suited to displaying musical notes when their cues are active, but cue events are better suited to playing musical notes because action must be taken to start and stop their audio playback.
 
