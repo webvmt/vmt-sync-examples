@@ -22,6 +22,9 @@
         constructor(startTime, endTime) {
             // EventTarget
             super();
+            if (this.constructor == TextTrackCuePolyfill || this.constructor == root.TextTrackCue) {
+                throw new TypeError('Abstract base class cannot be instantiated without extension');
+            }
             // TextTrackCue
             this.startTime = startTime;
             this.endTime = endTime;

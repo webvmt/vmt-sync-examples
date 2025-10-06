@@ -27,7 +27,7 @@ The basic design to access timed metadata in a web page using WebVMT is:
  ```mermaid
  graph TD
     A(VMT file) --> |Parse| B
-    B("WebVMT sync 
+    B("WebVMT sync
     commands") --> |Create| C
     C(DataCues) --> |"Add event
     handlers"| E
@@ -63,6 +63,8 @@ cue types")
 tracks")
   E("Multiple
 handlers")
+  F("Track
+events")
 ```
 
 Code variations are:
@@ -72,12 +74,13 @@ Code variations are:
  1. [Duplicate cue types](#duplicate-types) to distinguish similar data streams
  1. [Multiple tracks](#multiple-tracks) to merge data streams
  1. [Multiple handlers](#multiple-handlers) that independently process the same data stream
+ 1. [Track events](#track-events) for appropriate response
 
 ### <a id='streaming'></a>Streaming cues
 
 Live streaming use cases can include cues with a known start time and content, but an _unknown_ end time - which may become known in the future. These [unbounded cues](https://html.spec.whatwg.org/multipage/media.html#unbounded-text-track-cue) can be represented in a VMT file by omitting the cue end time.
 
-Unbounded cues can be overridden by a later cue of the same type as shown in the [streaming.vmt](vmt/streaming.vmt) file. This file produces the same net result as the bounded cues in [mixed.vmt](vmt/mixed.vmt), but without referring to any _future_ time.
+Unbounded cues can be overridden by a later cue of the same type as shown in the [streaming.vmt file](vmt/streaming.vmt). This file produces the same net result as the bounded cues in the [mixed.vmt file](vmt/mixed.vmt), but without referring to any _future_ time.
 
 #### Example
 
@@ -93,7 +96,7 @@ All cues must be derived from `TextTrackCue` in order to integrate with `TextTra
 
 #### Example
 
-In this example, `count` and `colour` cues are delivered using custom `CountCue` and `ColourCue` classes instead of `DataCue`. Custom cue definitions can be found in the [custom-cues](custom-cues) directory.
+In this example, `count` and `colour` cues are delivered using custom `CountCue` and `ColourCue` classes instead of `DataCue`. Custom cue definitions can be found in the [custom-cues directory](custom-cues).
 
 * [Custom cue example](https://webvmt.github.io/vmt-sync-examples/custom-cue.html)
 
@@ -128,3 +131,43 @@ Data may be processed for different purposes by discrete event listeners that ar
 In this example, `colour` and `count` cues are processed separately by two discrete cue handlers that are agnostic of each other.
 
 * [Multiple handler example](https://webvmt.github.io/vmt-sync-examples/multi-handler.html)
+
+### <a id='track-events'></a>Track events
+
+A `TextTrack` generates a `cuechange` event whenever the active state changes for at least one of its cues. This event includes a list of active cues for that track, though does not identify which cues changed.
+
+Track events offer an alternative to cue events that may be better suited to certain use cases for reasons of response or efficiency. For example, a system may only need to know which cues are currently active, rather than tracking their individual transitions. In addition, processing a group update may be more efficient when many cues change concurrently, such as a stage lighting change for a live screening event.
+
+```mermaid
+graph TD
+    A(VMT file) --> |Parse| B
+    B("WebVMT sync
+    commands") --> |Create| C
+    C(DataCues) --> |Add| E
+    B --> |Create| D(Custom cues)
+    D --> |Add| E
+    E("TextTrack
+    with handler") --> |Track events| F
+    F(Event handlers)
+```
+
+The best choice of event type may depend on the processing action rather than the cue content. For example, track events are well-suited to displaying musical notes when their cues are active, but cue events are better suited to playing musical notes because action must be taken to start and stop their audio playback.
+
+#### Example
+
+In this example, `colour` and `count` cue updates are triggered by any change in the active cue states.
+
+* [Track events example](https://webvmt.github.io/vmt-sync-examples/datacue-change.html)
+
+#### Comparison of cue and track events
+
+The table below allows comparison of the previous cue event examples with their track event equivalents. Each pair of examples use identical JavaScript source files, though connect different event handlers in their `init` routines.
+
+| Example | Track event | Cue event |
+| --- | --- | --- |
+| DataCue | [DataCue (track)](https://webvmt.github.io/vmt-sync-examples/datacue-change.html) | [DataCue (cue)](https://webvmt.github.io/vmt-sync-examples/datacue.html) |
+| Streaming | [Streaming (track)](https://webvmt.github.io/vmt-sync-examples/streaming-change.html) | [Streaming (cue)](https://webvmt.github.io/vmt-sync-examples/streaming.html) |
+| Custom cue | [Custom cue (track)](https://webvmt.github.io/vmt-sync-examples/custom-cue-change.html) | [Custom cue (cue)](https://webvmt.github.io/vmt-sync-examples/custom-cue.html) |
+| Multiple count | [Multiple count (track)](https://webvmt.github.io/vmt-sync-examples/multi-count-change.html) | [Multiple count (cue)](https://webvmt.github.io/vmt-sync-examples/multi-count.html) |
+| Multiple track | [Multiple track (track)](https://webvmt.github.io/vmt-sync-examples/multi-track-change.html) | [Multiple track (cue)](https://webvmt.github.io/vmt-sync-examples/multi-track.html) |
+| Multiple handler | [Multiple handler (track)](https://webvmt.github.io/vmt-sync-examples/multi-handler-change.html) | [Multiple handler (cue)](https://webvmt.github.io/vmt-sync-examples/multi-handler.html) |

@@ -16,6 +16,10 @@
         <!-- example code -->
         <link rel="stylesheet" href="css/common-example.css">
         <script type="text/javascript" src="js/common-example.js"></script>
+        <script>
+            <!-- handle cue enter & exit events only (default behaviour) -->
+            const vmtSyncExample = {cueEvent: true};
+        </script>
         <script type="text/javascript" src="js/custom-cue-example.js"></script>
     </head>
     <body>
@@ -29,5 +33,6 @@
                 <div class="count-frame">Count: <span id="count" class="count"></span></div>
                 <div class="colour-frame">Colour: <span id="colour" class="colour">&nbsp;&#9679;</span></div>
             </div>
+        </div>
     </body>
 </html>

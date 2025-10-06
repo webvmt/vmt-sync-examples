@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multiple Handler Example</title>
+        <title>Streaming DataCue Example With Track Events</title>
         <!-- polyfill -->
         <script type="text/javascript" src="polyfills/texttrackcuepolyfill-texttrack.js"></script>
- 
+
         <!-- utilities -->
         <script type="text/javascript" src="utils/vmt-loader.js"></script>
         <script type="text/javascript" src="utils/vmt-sync-parser.js"></script>
-       
+        
         <!-- example code -->
         <link rel="stylesheet" href="css/common-example.css">
         <script type="text/javascript" src="js/common-example.js"></script>
         <script>
-            <!-- handle cue enter & exit events only (default behaviour) -->
-            const vmtSyncExample = {cueEvent: true};
+            <!-- handle track events only -->
+            const vmtSyncExample = {cueEvent: false};
         </script>
-        <script type="text/javascript" src="js/count-example.js"></script>
-        <script type="text/javascript" src="js/colour-example.js"></script>
+        <script type="text/javascript" src="js/datacue-example.js"></script>
     </head>
     <body>
         <div class="video-wrapper">
             <video id="video-player" controls src="media/big_buck_bunny_720p_1mb.mp4" width="672" height="378">
-                <track src="vmt/mixed-cues.vmt" kind="metadata" />
+                <track src="vmt/streaming-cues.vmt" kind="metadata" />
                 Your browser does not support HTML5 video.
             </video>
 

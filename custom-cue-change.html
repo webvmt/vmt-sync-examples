@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Multiple Handler Example</title>
+        <title>Custom Cue Example With Track Events</title>
         <!-- polyfill -->
         <script type="text/javascript" src="polyfills/texttrackcuepolyfill-texttrack.js"></script>
- 
+        
+        <!-- custom cues -->
+        <script type="text/javascript" src="custom-cues/countcue.js"></script>
+        <script type="text/javascript" src="custom-cues/colourcue.js"></script>
+
         <!-- utilities -->
         <script type="text/javascript" src="utils/vmt-loader.js"></script>
         <script type="text/javascript" src="utils/vmt-sync-parser.js"></script>
-       
+        
         <!-- example code -->
         <link rel="stylesheet" href="css/common-example.css">
         <script type="text/javascript" src="js/common-example.js"></script>
         <script>
-            <!-- handle cue enter & exit events only (default behaviour) -->
-            const vmtSyncExample = {cueEvent: true};
+            <!-- handle track events only -->
+            const vmtSyncExample = {cueEvent: false};
         </script>
-        <script type="text/javascript" src="js/count-example.js"></script>
-        <script type="text/javascript" src="js/colour-example.js"></script>
+        <script type="text/javascript" src="js/custom-cue-example.js"></script>
     </head>
     <body>
         <div class="video-wrapper">

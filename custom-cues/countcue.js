@@ -8,27 +8,27 @@
 
 class CountCue extends TextTrackCuePolyfill {
     // attributes
-    #secs;
+    #count;
 
     // constructor
     constructor(startTime, endTime, content) {
         // TextTrackCuePolyfill
         super(startTime, endTime);
         // CountCue
-        this.#setSecs(content);
+        this.#setCount(content);
     }
 
-    #setSecs(value) {
+    #setCount(value) {
         if (typeof value == 'number') {
-            this.#secs = value;
+            this.#count = value;
         }
     }
     
-    // secs
-    get secs() {
-        return this.#secs;
+    // count
+    get count() {
+        return this.#count;
     }
-    set secs(secs) {
-        this.#setSecs(secs);
+    set count(value) {
+        this.#setCount(value);
     }  
 }

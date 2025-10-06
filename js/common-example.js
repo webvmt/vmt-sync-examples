@@ -7,6 +7,30 @@ const SECS_DP = 3;
 //let toString = obj => Object.entries(obj).map(([k, v]) => `${k}: ${v}`).join(', ');
 var toString = obj => Object.entries(obj).map(([k, v]) => typeof v == 'object' ? `${k}: {${toString(v)}}` : `${k}: ${v}`).join(', ');
 
+function setExampleOptions(defaults) {
+    var options = defaults; // defaults
+    try { // reference may be undefined
+        if (vmtSyncExample) { // set options
+            for (const o in vmtSyncExample) {
+                options[o] = vmtSyncExample[o];
+            }
+        }
+    } catch (error) {
+        // ignore error
+    }
+    return options;
+}
+
+function getLatestStartTime(cueList) {
+    var latestStartTime = -Infinity;
+    for (const cue of cueList) {
+        if (cue.startTime > latestStartTime) {
+            latestStartTime = cue.startTime;
+        }
+    }
+    return latestStartTime;
+}
+
 function syncToCues(vmtSync, allowCustomCues) {
     var cues = [];
     for (var s = 0; s < vmtSync.length; s++) {
@@ -48,12 +72,16 @@ function addCuesToTrack(cues, track, onEnter, onExit) {
     for (var c = 0; c < cues.length; c++) {
         // create cue
         var cue;
-        if (cues[c].class == DataCuePolyfill) { // DataCue
-            cue = new (cues[c].class)(cues[c].start, cues[c].end, cues[c].content.value, cues[c].content.type);
-        } else { // custom cue
-            cue = new (cues[c].class)(cues[c].start, cues[c].end, cues[c].content);
+        switch (cues[c].class.name) { // use name to avoid unknown cue class errors
+            case 'DataCuePolyfill': // DataCue
+                cue = new (cues[c].class)(cues[c].start, cues[c].end, cues[c].content.value, cues[c].content.type);
+                break;
+
+            default: // custom cue
+                cue = new (cues[c].class)(cues[c].start, cues[c].end, cues[c].content);
+                break;
         }
-        
+
     	// add cue listeners
         if (onEnter) {
             cue.addEventListener('enter', onEnter);
@@ -61,7 +89,7 @@ function addCuesToTrack(cues, track, onEnter, onExit) {
         if (onExit) {
             cue.addEventListener('exit', onExit);
         }
-        
+
     	// add cue to track
     	track.addCue(cue);
     }
@@ -69,9 +97,9 @@ function addCuesToTrack(cues, track, onEnter, onExit) {
 
 function getCueContent(cue) {
     var content = {};
-    switch (cue.constructor.name) {
+    switch (cue.constructor.name) { // use name to avoid unknown cue class errors
         case 'CountCue':
-            content = Number(cue.secs);
+            content = Number(cue.count);
             break;
 
         case 'ColourCue':
@@ -81,7 +109,7 @@ function getCueContent(cue) {
     	case 'DataCuePolyfill':
             content = {type: cue.type, value: cue.value};
             break;
-            
+
         default:
             break;
     }
