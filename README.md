@@ -188,8 +188,8 @@ WebVMT was developed from WebVTT and is designed to address identified requireme
 | Cue content | Structured data <br/>including JSON &amp; </br>binary encodings | Text strings |
 | VTTCue integration | No | Yes |
 | DataCue integration | Yes | No |
-| Stateful cue support <br/>for data aggregation | Yes | No |
 | Unbounded cue support <br/>for streaming | Yes | No |
 | Negative cue time support <br/>for non-destructive synchronisation | Yes | No |
+| Stateful cue support <br/>for data aggregation | Yes | No |
 | Data interpolation <br/>for millisecond accuracy | Yes | No |
 | Geospatial feature support | Yes | No |
