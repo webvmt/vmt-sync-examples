@@ -1,6 +1,12 @@
 # vmt-sync-examples
 
-## Overview
+## Contents
+
+ * [Overview](#overview)
+ * [Code variations](#code-variations)
+ * [WebVTT comparison](#webvtt-comparison)
+
+## <a id='overview'></a>Overview
 
 These examples show how timed metadata can be synchronised with video using the [WebVMT sync command](https://www.w3.org/TR/webvmt/#synchronized-data) and accessed with [DataCue](https://wicg.github.io/datacue/#datacue-interface) or a custom [TextTrackCue](https://developer.mozilla.org/en-US/docs/Web/API/TextTrackCue) in a web page
 
@@ -46,7 +52,7 @@ In this example, `count` and `colour` cues are delivered by a single track using
 
  * [DataCue example](https://webvmt.github.io/vmt-sync-examples/datacue.html)
 
-## Code variations
+## <a id='code-variations'></a>Code variations
 
 Each variation is based on the [basic design above](#code-design), but demonstrates how a single additional feature can be integrated with this design. Many variations can produce the same net result as the basic design, though underlying differences can be observed in the `console.log` output.
 
@@ -171,3 +177,19 @@ The table below allows comparison of the previous cue event examples with their 
 | Multiple count | [Multiple count (track)](https://webvmt.github.io/vmt-sync-examples/multi-count-change.html) | [Multiple count (cue)](https://webvmt.github.io/vmt-sync-examples/multi-count.html) |
 | Multiple track | [Multiple track (track)](https://webvmt.github.io/vmt-sync-examples/multi-track-change.html) | [Multiple track (cue)](https://webvmt.github.io/vmt-sync-examples/multi-track.html) |
 | Multiple handler | [Multiple handler (track)](https://webvmt.github.io/vmt-sync-examples/multi-handler-change.html) | [Multiple handler (cue)](https://webvmt.github.io/vmt-sync-examples/multi-handler.html) |
+
+## <a id='webvtt-comparison'></a>WebVTT comparison
+
+WebVMT was developed from WebVTT and is designed to address identified requirements for timed location, but has since broadened in scope to include timed metadata for sensors and synchronised data in general. Key differences between these two formats are highlighted in the table below to help identify the best choice for a particular use case.
+
+| Feature | WebVMT | WebVTT |
+| --- | --- | --- |
+| Data type | Timed metadata | Timed text |
+| Cue content | Structured data <br/>including JSON &amp; </br>binary encodings | Text strings |
+| VTTCue integration | No | Yes |
+| DataCue integration | Yes | No |
+| Stateful cue support <br/>for data aggregation | Yes | No |
+| Unbounded cue support <br/>for streaming | Yes | No |
+| Negative cue time support <br/>for non-destructive synchronisation | Yes | No |
+| Data interpolation <br/>for millisecond accuracy | Yes | No |
+| Geospatial feature support | Yes | No |
