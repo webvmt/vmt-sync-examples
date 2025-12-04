@@ -185,7 +185,7 @@ WebVMT was developed from WebVTT and is designed to address identified requireme
 ```mermaid
 graph TD
     A("**TextTrackCue**
-    _Abstract cue_") --> |"WebVMT sync
+    _Abstract cue_") --> |"WebVMT
     cue"| C("**DataCue**
     _Timed metadata_")
     A --> |"WebVTT
