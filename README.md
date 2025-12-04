@@ -180,7 +180,20 @@ The table below allows comparison of the previous cue event examples with their 
 
 ## <a id='webvtt-comparison'></a>WebVTT comparison
 
-WebVMT was developed from WebVTT and is designed to address identified requirements for timed location, but has since broadened in scope to include timed metadata for sensors and synchronised data in general. Key differences between these two formats are highlighted in the table below to help identify the best choice for a particular use case.
+WebVMT was developed from WebVTT and is designed to address identified requirements for timed location, but has since broadened in scope to include timed metadata for sensors and synchronised data in general.
+
+```mermaid
+graph TD
+    A("**TextTrackCue**
+    _Abstract cue_") --> |"WebVTT
+    cue"| B("**VTTCue**
+    _Timed text_")
+    A --> |"WebVMT sync
+    cue"| C("**DataCue**
+    _Timed metadata_")
+```
+
+Key differences between these two formats are highlighted in the table below to help identify the best choice for a particular use case.
 
 | Feature | WebVMT | WebVTT |
 | --- | --- | --- |
