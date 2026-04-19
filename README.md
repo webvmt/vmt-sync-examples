@@ -198,7 +198,7 @@ Key differences between these two formats are highlighted in the table below to 
 | Feature | WebVMT | WebVTT |
 | --- | --- | --- |
 | Data type | Timed metadata | Timed text |
-| Cue content | Structured data <br/>including JSON &amp; </br>binary encodings | Text strings |
+| Cue content | Structured data <br/>including JSON &amp; <br/>binary encodings | Text strings |
 | HTML integration | DataCue | VTTCue |
 | Unbounded cue support <br/>for streaming | Yes | No |
 | Negative cue time support <br/>for non-destructive synchronisation | Yes | No |
