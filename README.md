@@ -184,8 +184,13 @@ WebVMT was developed from WebVTT and is designed to address identified requireme
 
 ```mermaid
 graph TD
-    A(<b>TextTrackCue</b><br><i>Abstract cue</i>) --> |WebVMT<br>cue| C(<b>DataCue</b><br><i>Timed metadata</i>)
-    A --> |WebVTT<br>cue| B(<b>VTTCue</b><br><i>Timed text</i>)
+    A("<b>TextTrackCue</b>
+    <i>Abstract cue</i>") --> |"WebVMT
+    cue"| C("<b>DataCue</b>
+    <i>Timed metadata</i>")
+    A --> |"WebVTT
+    cue"| B("<b>VTTCue</b>
+    <i>Timed text</i>")
 ```
 
 Key differences between these two formats are highlighted in the table below to help identify the best choice for a particular use case.
